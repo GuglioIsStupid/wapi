@@ -5,7 +5,7 @@
 -- The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-local http = require("socket.http")
+local https = require("https")
 local ltn12 = require("ltn12")
 
 local webapi = {
@@ -23,7 +23,7 @@ if type(...) == "number" then
   
   local body = {}
   args.sink = ltn12.sink.table(body)
-  local r, c, h = http.request(args)
+  local r, c, h = https.request(args.url, args)
 
   love.thread.getChannel(webapi.prefix .. i .. '_RES'):push({ table.concat(body), h, c })
   

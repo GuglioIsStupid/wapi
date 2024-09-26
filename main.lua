@@ -20,7 +20,6 @@ function love.draw()
     end
     
   elseif result then --our content is ready
-    
     love.graphics.printf(result, 100, 240, love.graphics.getWidth() - 200, "center")
     
   end
@@ -40,7 +39,7 @@ function love.keypressed(key)
     request = wapi.request({
       method = "GET",
       url = "http://jsonplaceholder.typicode.com/posts/1"
-    }, function (body, headers, code)
+    }, function (code, headers, body)
     
       result = body
     
